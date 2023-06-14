@@ -41,9 +41,27 @@ ALTER TASK DAILY_CITY_METRICS_UPDATE_TASK RESUME;
 EXECUTE TASK ORDERS_UPDATE_TASK;
 
 
+
 -- ----------------------------------------------------------------------------
 -- Step #3: Monitor tasks in Snowsight
 -- ----------------------------------------------------------------------------
+
+SELECT *
+FROM TABLE(INFORMATION_SCHEMA.TASK_HISTORY(
+    SCHEDULED_TIME_RANGE_START=>DATEADD('DAY',-1,CURRENT_TIMESTAMP()),
+    RESULT_LIMIT => 100))
+ORDER BY SCHEDULED_TIME DESC
+
+SELECT
+    TIMESTAMPDIFF(SECOND, CURRENT_TIMESTAMP, SCHEDULED_TIME) NEXT_RUN,
+    SCHEDULED_TIME,
+    NAME,
+    STATE
+FROM TABLE(INFORMATION_SCHEMA.TASK_HISTORY())
+WHERE STATE = 'SCHEDULED'
+ORDER BY COMPLETED_TIME DESC;
+
+
 
 /*---
 -- TODO: Add Snowsight details here

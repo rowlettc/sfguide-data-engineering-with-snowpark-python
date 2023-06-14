@@ -1,0 +1,17 @@
+snowsql_config_path = "~/.snowsql/config"
+snowsql_connection_name = "dev"
+
+[default]
+input_parameters = "()"
+return_type = "table"
+file = "app.zip"
+name = "SNOWPARK_GENERATE_RUNNING_SUM"
+handler = "generate_running_sum.process"
+execute_as_caller = true
+
+[dev]
+database = "TXN_DB"
+schema = "HARMONIZED"
+warehouse = "TXN_WH"
+role = "TXN_ROLE"
+overwrite = true

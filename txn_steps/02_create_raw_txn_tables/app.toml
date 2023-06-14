@@ -1,0 +1,17 @@
+snowsql_config_path = "~/.snowsql/config"
+snowsql_connection_name = "dev"
+
+[default]
+input_parameters = "()"
+return_type = "string"
+file = "app.zip"
+name = "cof_score_sp"
+handler = "app.main"
+execute_as_caller = true
+
+[dev]
+database = "TXN_DB"
+schema = "HARMONIZED"
+warehouse = "TXN_WH"
+role = "TXN_ROLE"
+overwrite = true
