@@ -54,8 +54,8 @@ if __name__ == '__main__':
     session = snowpark_utils.get_snowpark_session()
 
     if len(sys.argv) > 1:
-        print(main(session, *sys.argv[1:]))  # type: ignore
+        print(main(session, *sys.argv[1:]))
     else:
-        print(main(session))  # type: ignore
+        print(main(session))
 
     session.close()
